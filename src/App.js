@@ -5,12 +5,7 @@ import BottomBar from "./components/BottomBar"
 
 
 function App() {
-  // const userData=useSelector((state)=>state.user)
-  // // console.log("user......",userData)
-  // const PageRender=(Page,auth)=>{
-  //   console.log(auth)
-  //   return <Page/>
-  // }
+  
   return (
     < >
     <TopBar/>
