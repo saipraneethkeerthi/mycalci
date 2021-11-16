@@ -6,6 +6,8 @@
  */
 import React, { Component } from "react";
 import "../Html/Css/Main.css";
+import {updateHistory} from "../store/actions/user"
+import {connect} from "react-redux"
 
 class Body extends Component { 
   constructor(props) {
@@ -100,6 +102,7 @@ class Body extends Component {
         String(this.state.finalOperand2)
     );
     this.setState({ history: arr });
+    this.props.updateHistory(arr)
     if (this.state.operator === "+") {
       this.setState({
         display2: this.state.finalOperand1 + this.state.finalOperand2,
@@ -164,9 +167,7 @@ class Body extends Component {
     ];
     return (
       <>
-      <div className=" card shadow">
-            <h2>no of calculations:{this.state.history.length}</h2>
-        </div>
+     
         <h1>Calculator Design Using HTML Layout</h1>
         <div class="container w-75">
           {this.state.error ? (
@@ -221,9 +222,23 @@ class Body extends Component {
             </div>
           </div>
         </div>
+        <div>
+          HISTORY:{this.state.history.map(his=>(
+            <h4>{his}</h4>
+          ))}
+        </div>
       </>
     );
   }
 }
+const mapDispatchToProps = () => ({
+  updateHistory
+});
+const mapStateToProps = state => ({
+  user: state.user
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps()
+)(Body);
 
-export default Body;

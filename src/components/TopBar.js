@@ -1,9 +1,11 @@
 import React,{useState} from 'react';
+import {connect} from "react-redux"
+
 /**
  * @param {*} TopBar it will accept all the props and states
  * @returns a html tags wihich has a state( count ) in it 
  */
-const Topbar = () => {
+const Topbar = (props) => {
     /**
      * @param {Integer} count 
      * @param {*} setCount it is used to set state of the count
@@ -12,9 +14,14 @@ const Topbar = () => {
     const [count,setCount]=useState(23)
     return (
         <div className=" card shadow">
-            <h2>no of calculations:{count}</h2>
+            <h2>no of calculations:{props.history.length}</h2>
         </div>
     );
 }
-
-export default Topbar;
+const mapStateToProps = state => ({
+    history: state.user.history
+  });
+  export default connect(
+    mapStateToProps
+  )(Topbar);
+  
