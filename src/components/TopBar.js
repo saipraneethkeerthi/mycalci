@@ -1,18 +1,20 @@
+import React,{useState} from 'react';
 /**
- * Importing REACT
- * The below code is used to display the Header of the page
- *
+ * @param {*} TopBar it will accept all the props and states
+ * @returns a html tags wihich has a state( count ) in it 
  */
-import React, { useState } from "react";
-
 const Topbar = () => {
-  const [count, setCount] = useState(23);
-
-  return (
-    <div>
-      <h1>no of calculations:{count}</h1>
-    </div>
-  );
-};
+    /**
+     * @param {Integer} count 
+     * @param {*} setCount it is used to set state of the count
+     * count is the useState variable which will store the integer value in it
+     */
+    const [count,setCount]=useState(23)
+    return (
+        <div className=" card shadow">
+            <h2>no of calculations:{count}</h2>
+        </div>
+    );
+}
 
 export default Topbar;

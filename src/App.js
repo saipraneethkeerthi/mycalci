@@ -7,20 +7,12 @@ import BottomBar from "./components/BottomBar"
 function App() {
   
   return (
-    < >
+    <div className="container" >
     <TopBar/>
     <Body/>
     <BottomBar/>
-      {/* <Router> 
-        <Switch>
-          <Route exact path="/register" render={()=>PageRender(Signup,'signup')}/> 
-          <Route exact path="/login" render={()=>PageRender(Login,'login')}/> 
-          <Route exact path="/" render={()=>PageRender(Landing,'landing')}/> 
-          <Route exact path="/dashboard" render={()=>PageRender(Dashboard)}/> 
-        </Switch>
-      </Router> */}
-       
-    </>
+      
+    </div>
   );
 }
 
