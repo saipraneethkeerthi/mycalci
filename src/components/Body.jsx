@@ -1,15 +1,16 @@
 /**
  * Importing REACT
+ * Importing css and main.css from html folder
  * The below code is used to display the body of the page
  *
  */
 import React, { Component } from "react";
 import "../Html/Css/Main.css";
 
-class Body extends Component {
+class Body extends Component { 
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = {   //Initial states
       history: [],
       operand1: "",
       operand2: "",
@@ -23,8 +24,12 @@ class Body extends Component {
     };
     this.handleclear = this.handleclear.bind(this);
   }
-
-  handleclear = (event) => {
+/**
+ * @description: the below function is used to clear the entire input field
+ * @params {*} event 
+ * @return this.setstate
+ */
+  handleclear = (event) => {   
     console.log(this.state);
     this.setState({
       history: [],
@@ -41,6 +46,13 @@ class Body extends Component {
     event.preventDefault();
   };
 
+	/**
+ * @description: the below function is used to accept user inputs
+ * 
+ * @params {value}
+ * @return modifies the state component
+ *
+ */
   handleOperand = (value) => {
     if (this.state.isOperator) {
       let temp = Number(this.state.operand2 + value);
@@ -58,6 +70,11 @@ class Body extends Component {
       this.setState({ operand1: this.state.operand1 + value });
     }
   };
+
+	/**
+ * @description: the below function is used to perform arithematic operations
+ * @params {value}
+ */
   handleOperator = (value) => {
     this.setState({
       isOperator: true,
@@ -65,6 +82,10 @@ class Body extends Component {
       operator: value,
     });
   };
+	/**
+ * @description: the below function is used to display output
+ * @params {value}
+ */
   getFinalRes=()=>{
       if(this.state.operator==="+"){
           this.setState({display2: this.state.finalOperand1+this.state.finalOperand2});
