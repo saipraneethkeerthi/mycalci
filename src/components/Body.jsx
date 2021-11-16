@@ -17,73 +17,140 @@ class Body extends Component {
       finalOperand2: "",
       operator: "",
       isOperator: false,
-      Display1: "",
-      Display2: "",
-      error: "",
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit = (event) => {
-    console.log(this.state);
-    this.setState({
-      history: [],
-      operand1: "",
-      operator: "",
-      operand2: "",
       display1: "",
       display2: "",
+      error: "",
+    };
+  }
+
+  handleclear = () => {
+    console.log(this.state);
+    this.setState({
+      operand1: "",
+      operand2: "",
+      finalOperand1: "",
+      finalOperand2: "",
+      operator: "",
+      isOperator: false,
+      display1: "",
+      display2: "",
+      error: "",
     });
-    event.preventDefault();
   };
 
   handleOperand = (value) => {
     if (this.state.isOperator) {
-      let temp = Number(this.state.operand2 + value);
-      if (temp)
-        this.setState({
-          finalOperand2: temp,
-          display1: this.state.display1 + value,
-        });
-      else this.setState({ error: "ERROR" });
-      this.setState({ operand2: this.state.operand2 + value });
+      if (String(this.state.finalOperand2).length <= 10) {
+        let temp = Number(this.state.operand2 + value);
+        if (temp)
+          this.setState({
+            finalOperand2: temp,
+            display1: this.state.display1 + value,
+          });
+        else this.setState({ error: "ERROR" });
+        this.setState({ operand2: this.state.operand2 + value });
+      }else {
+        this.setState({ error: "LENGTH EXCEDDED" });
+      }
+      
     } else {
       if (String(this.state.finalOperand1).length <= 10) {
         let temp = Number(this.state.operand1 + value);
         if (temp) this.setState({ finalOperand1: temp, display1: temp });
         else this.setState({ error: "ERROR" });
         this.setState({ operand1: this.state.operand1 + value });
-      }else{
-        this.setState({ error: "ERROR" });
+      } else {
+        this.setState({ error: "LENGTH EXCEDDED" });
       }
     }
   };
   handleOperator = (value) => {
     this.setState({
       isOperator: true,
-      display1: this.state.display1 + value,
+      display1: String(this.state.finalOperand1)+value+String(this.state.finalOperand2),
       operator: value,
     });
   };
   getFinalRes = () => {
+    let arr = [...this.state.history];
+    arr.push(
+      String(this.state.finalOperand1) +
+        this.state.operator +
+        String(this.state.finalOperand2)
+    );
+    this.setState({ history: arr });
     if (this.state.operator === "+") {
       this.setState({
         display2: this.state.finalOperand1 + this.state.finalOperand2,
       });
+    } else if (this.state.operator === "-") {
+      this.setState({
+        display2: this.state.finalOperand1 - this.state.finalOperand2,
+      });
+    } else if (this.state.operator === "*") {
+      this.setState({
+        display2: this.state.finalOperand1 * this.state.finalOperand2,
+      });
+    } else if (this.state.operator === "/") {
+      this.setState({
+        display2: this.state.finalOperand1 / this.state.finalOperand2,
+      });
+    } else if (this.state.operator === "%") {
+      this.setState({
+        display2: this.state.finalOperand1 % this.state.finalOperand2,
+      });
     }
+
   };
+  handleDelete=()=>{
+      if(this.state.isOperator){
+        let str=String(this.state.finalOperand2).slice(0,-1)
+        //   console.log(str)
+          this.setState({finalOperand2:Number(str),display1:String(this.state.finalOperand1)+this.state.operator+str})
+      }
+      else{
+          let str=String(this.state.finalOperand1).slice(0,-1)
+    //   console.log(str)
+      this.setState({finalOperand1:Number(str),display1:str+this.state.operator+String(this.state.finalOperand2)}) 
+      }
+     
+  }
 
   render() {
     console.log(this.state);
-
+    const allVal = [
+      { id: "operand", val: "7" },
+      { id: "operand", val: "8" },
+      { id: "operand", val: "9" },
+      { id: "operator", val: "/" },
+      { id: "operand", val: "4" },
+      { id: "operand", val: "5" },
+      { id: "operand", val: "6" },
+      { id: "operator", val: "*" },
+      { id: "operand", val: "1" },
+      { id: "operand", val: "2" },
+      { id: "operand", val: "3" },
+      { id: "operator", val: "-" },
+      { id: "operand", val: "0" },
+      { id: "operand", val: "." },
+      { id: "operator", val: "%" },
+      { id: "operator", val: "+" },
+    ];
     return (
       <>
+      <div className=" card shadow">
+            <h2>no of calculations:{this.state.history.length}</h2>
+        </div>
         <h1>Calculator Design Using HTML Layout</h1>
         <div class="container w-75">
-          {/* <div class="header">Calculator</div> */}
-          {/* <input type="text" class="result"/> */}
-          {this.state.error?(<h1>ERROR</h1>):(<><h2>{this.state.display1}</h2>
-          <h2 style={{ float: "right" }}>{this.state.display2}</h2></>)}
+          {this.state.error ? (
+            <h1>{this.state.error}</h1>
+          ) : (
+            <>
+              <h2>{this.state.display1}</h2>
+              <h2 style={{ float: "right" }}>{this.state.display2}</h2>
+            </>
+          )}
 
           <div className="first-row">
             <input
@@ -91,130 +158,30 @@ class Body extends Component {
               name=""
               value="Del"
               class=" red small white-text top-margin"
+              onClick={()=>this.handleDelete()}
             />
             <input
               type="button"
               name=""
               value="Clear"
               class=" red small white-text "
+              onClick={() => this.handleclear()}
             />
           </div>
           <div className="col-12">
-            <input
-              type="button"
-              name=""
-              value="7"
-              class="global"
-              onClick={(e) => this.handleOperand(e.target.value)}
-            />
-            <input
-              type="button"
-              name=""
-              value="8"
-              class="global"
-              onClick={(e) => this.handleOperand(e.target.value)}
-            />
-            <input
-              type="button"
-              name=""
-              value="9"
-              class="global"
-              onClick={(e) => this.handleOperand(e.target.value)}
-            />
-            <input
-              type="button"
-              name=""
-              value="/"
-              class="global"
-              onClick={(e) => this.handleOperator(e.target.value)}
-            />
-
-            <input
-              type="button"
-              name=""
-              value="4"
-              class="global"
-              onClick={(e) => this.handleOperand(e.target.value)}
-            />
-            <input
-              type="button"
-              name=""
-              value="5"
-              class="global"
-              onClick={(e) => this.handleOperand(e.target.value)}
-            />
-            <input
-              type="button"
-              name=""
-              value="6"
-              class="global"
-              onClick={(e) => this.handleOperand(e.target.value)}
-            />
-            <input
-              type="button"
-              name=""
-              value="X"
-              class="global"
-              onClick={(e) => this.handleOperator(e.target.value)}
-            />
-
-            <input
-              type="button"
-              name=""
-              value="1"
-              class="global"
-              onClick={(e) => this.handleOperand(e.target.value)}
-            />
-            <input
-              type="button"
-              name=""
-              value="2"
-              class="global"
-              onClick={(e) => this.handleOperand(e.target.value)}
-            />
-            <input
-              type="button"
-              name=""
-              value="3"
-              class="global"
-              onClick={(e) => this.handleOperand(e.target.value)}
-            />
-            <input
-              type="button"
-              name=""
-              value="-"
-              class="global"
-              onClick={(e) => this.handleOperator(e.target.value)}
-            />
-
-            <input
-              type="button"
-              name=""
-              value="0"
-              class=" global"
-              onClick={(e) => this.handleOperand(e.target.value)}
-            />
-            <input
-              type="button"
-              name=""
-              value="."
-              class=" global"
-              onClick={(e) => this.handleOperand(e.target.value)}
-            />
-            <input
-              type="button"
-              name=""
-              value="%"
-              class="global"
-              onClick={(e) => this.handleOperator(e.target.value)}
-            />
-            <input
-              type="button"
-              name=""
-              value="+"
-              class="global"
-              onClick={(e) => this.handleOperator(e.target.value)}
-            />
+            {allVal.map((btn) => (
+              <input
+                type="button"
+                name=""
+                value={btn.val}
+                class="global"
+                onClick={(e) =>
+                  btn.id === "operand"
+                    ? this.handleOperand(e.target.value)
+                    : this.handleOperator(e.target.value)
+                }
+              />
+            ))}
           </div>
           <div>
             <div class="">
