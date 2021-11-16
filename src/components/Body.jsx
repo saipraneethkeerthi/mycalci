@@ -23,17 +23,12 @@ class Body extends Component {
       error: "",
     };
   }
-<<<<<<< HEAD
 /**
  * @description: the below function is used to clear the entire input field
  * @params {*} event 
  * @return this.setstate
  */
-  handleclear = (event) => {   
-=======
-
   handleclear = () => {
->>>>>>> 8500c790f90f2bb78c28d4924356ac35fe3f0efc
     console.log(this.state);
     this.setState({
       operand1: "",
@@ -93,15 +88,10 @@ class Body extends Component {
       operator: value,
     });
   };
-<<<<<<< HEAD
-	/**
+  	/**
  * @description: the below function is used to display output
  * @params {value}
  */
-  getFinalRes=()=>{
-      if(this.state.operator==="+"){
-          this.setState({display2: this.state.finalOperand1+this.state.finalOperand2});
-=======
   getFinalRes = () => {
     let arr = [...this.state.history];
     arr.push(
@@ -133,6 +123,11 @@ class Body extends Component {
     }
 
   };
+  /**
+   * @params {*}
+   * @description this function will delete only last number from the operand
+   * @return {this will update the states of the class}
+   */
   handleDelete=()=>{
       if(this.state.isOperator){
         let str=String(this.state.finalOperand2).slice(0,-1)
@@ -143,7 +138,6 @@ class Body extends Component {
           let str=String(this.state.finalOperand1).slice(0,-1)
     //   console.log(str)
       this.setState({finalOperand1:Number(str),display1:str+this.state.operator+String(this.state.finalOperand2)}) 
->>>>>>> 8500c790f90f2bb78c28d4924356ac35fe3f0efc
       }
      
   }
