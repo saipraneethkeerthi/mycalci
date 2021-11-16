@@ -3,14 +3,17 @@
  * The below code is used to display the body of the page
  *
  */
-import React from 'react';
+import React, { Component } from 'react';
 
-const Body = () => {
-    return (
-        <div>
-            <h1>body</h1>
-        </div>
-    );
+class Body extends Component {
+    render() {
+        return (
+            <div>
+                
+            </div>
+        );
+    }
 }
 
 export default Body;
+
