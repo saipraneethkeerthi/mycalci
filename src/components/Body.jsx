@@ -48,10 +48,14 @@ class Body extends Component {
       else this.setState({ error: "ERROR" });
       this.setState({ operand2: this.state.operand2 + value });
     } else {
-      let temp = Number(this.state.operand1 + value);
-      if (temp) this.setState({ finalOperand1: temp, display1: temp });
-      else this.setState({ error: "ERROR" });
-      this.setState({ operand1: this.state.operand1 + value });
+      if (String(this.state.finalOperand1).length <= 10) {
+        let temp = Number(this.state.operand1 + value);
+        if (temp) this.setState({ finalOperand1: temp, display1: temp });
+        else this.setState({ error: "ERROR" });
+        this.setState({ operand1: this.state.operand1 + value });
+      }else{
+        this.setState({ error: "ERROR" });
+      }
     }
   };
   handleOperator = (value) => {
@@ -61,24 +65,27 @@ class Body extends Component {
       operator: value,
     });
   };
-  getFinalRes=()=>{
-      if(this.state.operator==="+"){
-          this.setState({display2: this.state.finalOperand1+this.state.finalOperand2});
-      }
-  }
+  getFinalRes = () => {
+    if (this.state.operator === "+") {
+      this.setState({
+        display2: this.state.finalOperand1 + this.state.finalOperand2,
+      });
+    }
+  };
 
   render() {
     console.log(this.state);
+
     return (
       <>
         <h1>Calculator Design Using HTML Layout</h1>
         <div class="container w-75">
           {/* <div class="header">Calculator</div> */}
           {/* <input type="text" class="result"/> */}
-          <h2>{this.state.display1}</h2>
-          <h2 style={{ float: "right" }}>{this.state.display2}</h2>
+          {this.state.error?(<h1>ERROR</h1>):(<><h2>{this.state.display1}</h2>
+          <h2 style={{ float: "right" }}>{this.state.display2}</h2></>)}
 
-          <div class="first-row">
+          <div className="first-row">
             <input
               type="button"
               name=""
@@ -92,7 +99,7 @@ class Body extends Component {
               class=" red small white-text "
             />
           </div>
-          <div class="second-row">
+          <div className="col-12">
             <input
               type="button"
               name=""
@@ -121,8 +128,7 @@ class Body extends Component {
               class="global"
               onClick={(e) => this.handleOperator(e.target.value)}
             />
-          </div>
-          <div class="third-row">
+
             <input
               type="button"
               name=""
@@ -151,8 +157,7 @@ class Body extends Component {
               class="global"
               onClick={(e) => this.handleOperator(e.target.value)}
             />
-          </div>
-          <div class="fourth-row">
+
             <input
               type="button"
               name=""
@@ -181,8 +186,7 @@ class Body extends Component {
               class="global"
               onClick={(e) => this.handleOperator(e.target.value)}
             />
-          </div>
-          <div class="fourth-row">
+
             <input
               type="button"
               name=""
@@ -214,7 +218,13 @@ class Body extends Component {
           </div>
           <div>
             <div class="">
-              <input type="button" name="" value="=" class="green small" onClick={()=>this.getFinalRes()} />
+              <input
+                type="button"
+                name=""
+                value="="
+                class="green small"
+                onClick={() => this.getFinalRes()}
+              />
             </div>
           </div>
         </div>
