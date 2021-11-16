@@ -1,13 +1,18 @@
-import React,{useState} from 'react';
+/**
+ * Importing REACT
+ * The below code is used to display the Header of the page
+ *
+ */
+import React, { useState } from "react";
 
 const Topbar = () => {
-    const [count,setCount]=useState(23)
+  const [count, setCount] = useState(23);
 
-    return (
-        <div>
-            <h1>no of calculations:{count}</h1>
-        </div>
-    );
-}
+  return (
+    <div>
+      <h1>no of calculations:{count}</h1>
+    </div>
+  );
+};
 
 export default Topbar;

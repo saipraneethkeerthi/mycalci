@@ -1,3 +1,8 @@
+/**
+ * Importing REACT 
+ * The below code is used to display about the page
+ *
+ */
 import React from 'react';
 
 const Aboutpage = () => {

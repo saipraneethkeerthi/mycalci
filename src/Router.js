@@ -1,17 +1,17 @@
 /**
  * Importing BrowserRouter from components
  * Importing Aboutpage from components
- * 
- * @author: HARI VAMSHI
- *
+ 
  */
 import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
 import Aboutpage from "./components/AboutPage"
 import App from "./App"
 
+/**
+ * @description: it redirects from footer page to aboutus page  
+ */
 function RouterPage() {
-  
-  return (
+  return (  
     < >
       <Router> 
         <Switch>
@@ -19,7 +19,6 @@ function RouterPage() {
           <Route exact path="/about" render={()=><Aboutpage/>}/> 
         </Switch>
       </Router>
-       
     </>
   );
 }

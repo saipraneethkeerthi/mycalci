@@ -1,3 +1,8 @@
+/**
+ * Importing REACT 
+ * The below code is used to display the body of the page
+ *
+ */
 import React from 'react';
 
 const Body = () => {
