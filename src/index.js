@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import RouterPage from "./Router"
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RouterPage />
   </React.StrictMode>,
   document.getElementById('root')
 );
