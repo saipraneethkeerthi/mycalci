@@ -4,12 +4,15 @@
  *
  */
 import React, { Component } from 'react';
-
+/**
+ * Body consists paragraph
+ *
+ */
 class Body extends Component {
     render() {
         return (
             <div>
-                
+                <p>lorem ipsum dolor sit am</p>
             </div>
         );
     }
