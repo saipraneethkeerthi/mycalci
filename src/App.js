@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
+import Signup from './components/test-components/globalcomponents/signup/signup'
+import Login from "./components/test-components/globalcomponents/login/login"
+import Landing from './components/test-components/globalcomponents/Landing'
+import Dashboard from './components/test-components/globalcomponents/dashboard/dashboard'
+import ErrorPage from './components/test-components/globalcomponents/404/404'
+import {useSelector} from "react-redux"
+
 
 function App() {
+  const userData=useSelector((state)=>state.user)
+  // console.log("user......",userData)
+  const PageRender=(Page,auth)=>{
+    console.log(auth)
+    return <Page/>
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    < >
+      <Router> 
+        <Switch>
+          <Route exact path="/register" render={()=>PageRender(Signup,'signup')}/> 
+          <Route exact path="/login" render={()=>PageRender(Login,'login')}/> 
+          <Route exact path="/" render={()=>PageRender(Landing,'landing')}/> 
+          <Route exact path="/dashboard" render={()=>PageRender(Dashboard)}/> 
+        </Switch>
+      </Router>
+       
+    </>
   );
 }
 
