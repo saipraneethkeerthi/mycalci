@@ -1,9 +1,11 @@
-import React from 'react';
+import React,{useState} from 'react';
 
 const Topbar = () => {
+    const [count,setCount]=useState(23)
+
     return (
         <div>
-            <h1>top bar</h1>
+            <h1>no of calculations:{count}</h1>
         </div>
     );
 }
