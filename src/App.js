@@ -8,9 +8,9 @@ function App() {
   
   return (
     <div >
-    <TopBar/>
+    {/* <TopBar/> */}
     <Body/>
-    <BottomBar/>
+    {/* <BottomBar/> */}
       
     </div>
   );
