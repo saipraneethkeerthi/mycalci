@@ -21,18 +21,22 @@ class Body extends Component {
       Display2: "",
       error: "",
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleclear = this.handleclear.bind(this);
   }
 
-  handleSubmit = (event) => {
+  handleclear = (event) => {
     console.log(this.state);
     this.setState({
       history: [],
       operand1: "",
-      operator: "",
       operand2: "",
-      display1: "",
-      display2: "",
+      finalOperand1: "",
+      finalOperand2: "",
+      operator: "",
+      isOperator: false,
+      Display1: "",
+      Display2: "",
+      error: "",
     });
     event.preventDefault();
   };

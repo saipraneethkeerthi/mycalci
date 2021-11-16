@@ -1,4 +1,4 @@
-import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
+// import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
 import Body from "./components/Body.jsx"
 import TopBar from "./components/TopBar"
 import BottomBar from "./components/BottomBar"
