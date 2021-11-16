@@ -8,6 +8,32 @@ import '../Html/Css/Main.css'
 
 
 class Body extends Component {
+	constructor(props) {
+        super(props)
+            this.state = {
+                history: [],
+				  			operand1: "",
+								operator: "",
+								operand2: "",
+								Display1: "",
+								Display2: "",
+            }
+            this.handleSubmit = this.handleSubmit.bind(this)
+        }
+
+		handleSubmit = (event) => {
+			console.log(this.state)
+			this.setState({
+				history: [],
+				operand1: "",
+				operator: "",
+				operand2: "",
+				Display1: "",
+				Display2: "",
+            })
+            event.preventDefault()
+
+        }
     render() {
         return (
             <>

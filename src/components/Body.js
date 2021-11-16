@@ -9,10 +9,13 @@ import React, { Component } from 'react';
  *
  */
 class Body extends Component {
+
+
+    
     render() {
         return (
             <div>
-                <p>lorem ipsum dolor sit am</p>
+                
             </div>
         );
     }
