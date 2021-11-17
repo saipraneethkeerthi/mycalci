@@ -10,7 +10,7 @@ function App() {
     <div >
     <TopBar/>
     <Body/>
-    {/* <BottomBar/> */}
+    <BottomBar/>
       
     </div>
   );

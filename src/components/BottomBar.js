@@ -4,10 +4,9 @@
  * Footer will redirect to about us page
  *
  */
-import React from "react";
 const Bottombar = () => {
   return (
-    <div style={{ position: "absolute", bottom: "0" }}>
+    <div style={{ textAlign: "center", bottom: "0" }}>
       <a href="/about">footer</a>
     </div>
   );

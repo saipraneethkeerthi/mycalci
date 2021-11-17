@@ -9,7 +9,11 @@ import "../Html/Css/Main.css";
 import { updateHistory } from "../store/actions/user";
 import { connect } from "react-redux";
 
-class Body extends Component {
+/**
+ * @description: it is the class component which consists functions
+ * @return jsx
+ */
+class Body extends Component { 
   constructor(props) {
     super(props);
     this.state = {
@@ -56,10 +60,10 @@ class Body extends Component {
   handleOperand = (value) => {
     if (this.state.isOperator) {
       if (String(this.state.finalOperand2).length <= 10) {
-        let temp = Number(this.state.operand2 + value);
-        if (temp)
+        let isValid = Number(this.state.operand2 + value);
+        if (isValid)
           this.setState({
-            finalOperand2: temp,
+            finalOperand2: isValid,
             display1: this.state.display1 + value,
           });
         else this.setState({ error: "ERROR" });
@@ -69,12 +73,12 @@ class Body extends Component {
       }
     } else {
       if (String(this.state.finalOperand1).length <= 10) {
-        let temp = Number(this.state.operand1 + value);
-        if (temp) this.setState({ finalOperand1: temp, display1: temp });
+        let isValid = Number(this.state.operand1 + value);
+        if (isValid) this.setState({ finalOperand1: isValid, display1: isValid });
         else this.setState({ error: "ERROR" });
         this.setState({ operand1: this.state.operand1 + value });
       } else {
-        this.setState({ error: "LENGTH EXCEDDED" });
+        this.setState({ error: "LENGTH EXCEEDED" });
       }
     }
   };
@@ -86,12 +90,12 @@ class Body extends Component {
   handleOperator = (value) => {
     if (this.state.finalOperand1) {
       if (this.state.finalOperand1 && this.state.finalOperand2) {
-        let calRes = this.getFinalRes();
-        console.log("...///", calRes);
+        let finalResultCall = this.getFinalRes();
+        console.log("...///", finalResultCall);
         this.setState({
-          operand1: String(calRes),
-          finalOperand1: calRes,
-          display1: String(calRes) + value,
+          operand1: String(finalResultCall),
+          finalOperand1: finalResultCall,
+          display1: String(finalResultCall) + value,
           operand2: "",
           finalOperand2: "",
           operator: value,
@@ -114,14 +118,14 @@ class Body extends Component {
    */
   getFinalRes = () => {
     if (this.state.finalOperand1 && this.state.finalOperand2) {
-      let arr = [...this.state.history];
-      arr.push(
+      let historyArray = [...this.state.history];
+      historyArray.push(
         String(this.state.finalOperand1) +
-          this.state.operator +
-          String(this.state.finalOperand2)
+        this.state.operator +
+        String(this.state.finalOperand2)
       );
-      this.setState({ history: arr });
-      this.props.updateHistory(arr);
+      this.setState({ history: historyArray });
+      this.props.updateHistory(historyArray);
       if (this.state.operator === "+") {
         this.setState({
           display2: this.state.finalOperand1 + this.state.finalOperand2,
@@ -260,8 +264,8 @@ class Body extends Component {
 
           <div className="col-3">
             HISTORY:
-            {this.state.history.map((his) => (
-              <h4>{his}</h4>
+            {this.state.history.map((historyData) => (
+              <h4>{historyData}</h4>
             ))}
           </div>
         </div>
