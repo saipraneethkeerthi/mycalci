@@ -13,7 +13,7 @@ const Topbar = (props) => {
      */
     const [count,setCount]=useState(23)
     return (
-        <div className=" card shadow">
+        <div className=" card shadow" style={{margin:'50px'}}>
             <h2>no of calculations:{props.history.length}</h2>
         </div>
     );

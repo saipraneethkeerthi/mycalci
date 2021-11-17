@@ -135,14 +135,13 @@ class Body extends Component {
       if(this.state.isOperator){
         let str=String(this.state.finalOperand2).slice(0,-1)
         //   console.log(str)
-          this.setState({finalOperand2:Number(str),display1:String(this.state.finalOperand1)+this.state.operator+str})
+          this.setState({finalOperand2:Number(str),display1:String(this.state.finalOperand1)+this.state.operator+str,operand2:str})
       }
       else{
           let str=String(this.state.finalOperand1).slice(0,-1)
     //   console.log(str)
-      this.setState({finalOperand1:Number(str),display1:str+this.state.operator+String(this.state.finalOperand2)}) 
-      }
-     
+      this.setState({finalOperand1:Number(str),display1:str+this.state.operator+String(this.state.finalOperand2),operand1:str}) 
+      }   
   }
 
   render() {
@@ -168,9 +167,10 @@ class Body extends Component {
     return (
       <>
      
-        <h1>Calculator Design Using HTML Layout</h1>
-        <div class="container w-75">
-          {this.state.error ? (
+        <h1>Calculator</h1>
+        <div className="row"><div className="col-9"><div class="container w-75">
+          <div style={{margin:'10px',height:'75px'}}>
+             {this.state.error ? (
             <h1>{this.state.error}</h1>
           ) : (
             <>
@@ -178,6 +178,8 @@ class Body extends Component {
               <h2 style={{ float: "right" }}>{this.state.display2}</h2>
             </>
           )}
+          </div>
+         
 
           <div className="first-row">
             <input
@@ -192,6 +194,7 @@ class Body extends Component {
               name=""
               value="Clear"
               class=" red small white-text "
+              style={{marginTop:"4px"}}
               onClick={() => this.handleclear()}
             />
           </div>
@@ -221,12 +224,15 @@ class Body extends Component {
               />
             </div>
           </div>
-        </div>
-        <div>
+        </div></div>
+       
+        
+        <div className="col-3">
           HISTORY:{this.state.history.map(his=>(
             <h4>{his}</h4>
           ))}
-        </div>
+        </div></div>
+        
       </>
     );
   }
