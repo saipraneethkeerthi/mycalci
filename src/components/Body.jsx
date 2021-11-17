@@ -84,60 +84,70 @@ class Body extends Component {
    * @params {value}
    */
   handleOperator = (value) => {
-    if (this.state.finalOperand1 && this.state.finalOperand2) {
-      let calRes = this.getFinalRes();
-      console.log("...///", calRes);
-      this.setState({operand1: String(calRes),finalOperand1:calRes,display1:String(calRes)+value,operand2:'',finalOperand2:"",operator:value});
-    }else{
-      this.setState({
-      isOperator: true,
-      display1:
-        String(this.state.finalOperand1) +
-        value +
-        String(this.state.finalOperand2),
-      operator: value,
-    });
+    if (this.state.finalOperand1) {
+      if (this.state.finalOperand1 && this.state.finalOperand2) {
+        let calRes = this.getFinalRes();
+        console.log("...///", calRes);
+        this.setState({
+          operand1: String(calRes),
+          finalOperand1: calRes,
+          display1: String(calRes) + value,
+          operand2: "",
+          finalOperand2: "",
+          operator: value,
+        });
+      } else {
+        this.setState({
+          isOperator: true,
+          display1:
+            String(this.state.finalOperand1) +
+            value +
+            String(this.state.finalOperand2),
+          operator: value,
+        });
+      }
     }
-    
   };
   /**
    * @description: the below function is used to display output
    * @params {value}
    */
   getFinalRes = () => {
-    let arr = [...this.state.history];
-    arr.push(
-      String(this.state.finalOperand1) +
-        this.state.operator +
-        String(this.state.finalOperand2)
-    );
-    this.setState({ history: arr });
-    this.props.updateHistory(arr);
-    if (this.state.operator === "+") {
-      this.setState({
-        display2: this.state.finalOperand1 + this.state.finalOperand2,
-      });
-      return this.state.finalOperand1 + this.state.finalOperand2;
-    } else if (this.state.operator === "-") {
-      this.setState({
-        display2: this.state.finalOperand1 - this.state.finalOperand2,
-      });
-      return this.state.finalOperand1 - this.state.finalOperand2;
-    } else if (this.state.operator === "*") {
-      this.setState({
-        display2: this.state.finalOperand1 * this.state.finalOperand2,
-      });
-      return this.state.finalOperand1 * this.state.finalOperand2;
-    } else if (this.state.operator === "/") {
-      this.setState({
-        display2: this.state.finalOperand1 / this.state.finalOperand2,
-      });
-      return this.state.finalOperand1 / this.state.finalOperand2;
-    } else if (this.state.operator === "%") {
-      this.setState({
-        display2: this.state.finalOperand1 % this.state.finalOperand2,
-      });
-      return this.state.finalOperand1 % this.state.finalOperand2;
+    if (this.state.finalOperand1 && this.state.finalOperand2) {
+      let arr = [...this.state.history];
+      arr.push(
+        String(this.state.finalOperand1) +
+          this.state.operator +
+          String(this.state.finalOperand2)
+      );
+      this.setState({ history: arr });
+      this.props.updateHistory(arr);
+      if (this.state.operator === "+") {
+        this.setState({
+          display2: this.state.finalOperand1 + this.state.finalOperand2,
+        });
+        return this.state.finalOperand1 + this.state.finalOperand2;
+      } else if (this.state.operator === "-") {
+        this.setState({
+          display2: this.state.finalOperand1 - this.state.finalOperand2,
+        });
+        return this.state.finalOperand1 - this.state.finalOperand2;
+      } else if (this.state.operator === "*") {
+        this.setState({
+          display2: this.state.finalOperand1 * this.state.finalOperand2,
+        });
+        return this.state.finalOperand1 * this.state.finalOperand2;
+      } else if (this.state.operator === "/") {
+        this.setState({
+          display2: this.state.finalOperand1 / this.state.finalOperand2,
+        });
+        return this.state.finalOperand1 / this.state.finalOperand2;
+      } else if (this.state.operator === "%") {
+        this.setState({
+          display2: this.state.finalOperand1 % this.state.finalOperand2,
+        });
+        return this.state.finalOperand1 % this.state.finalOperand2;
+      }
     }
   };
   /**
