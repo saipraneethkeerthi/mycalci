@@ -3,20 +3,20 @@
  * Importing Aboutpage from components
  
  */
-import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
-import Aboutpage from "./components/AboutPage"
-import App from "./App"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Aboutpage from "./components/AboutPage";
+import App from "./App";
 
 /**
- * @description: it redirects from footer page to aboutus page  
+ * @description: it redirects from footer page to aboutus page
  */
 function RouterPage() {
-  return (  
-    < >
-      <Router> 
+  return (
+    <>
+      <Router>
         <Switch>
-          <Route exact path="/" render={()=><App/>}/> 
-          <Route exact path="/about" render={()=><Aboutpage/>}/> 
+          <Route exact path="/" render={() => <App />} />
+          <Route exact path="/about" render={() => <Aboutpage />} />
         </Switch>
       </Router>
     </>
