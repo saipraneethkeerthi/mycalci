@@ -57,7 +57,7 @@ class Body extends Component {
     if (this.state.isOperator) {
       if (String(this.state.finalOperand2).length <= 10) {
         let temp = Number(this.state.operand2 + value);
-        if (temp)
+        if (temp || temp===0)
           this.setState({
             finalOperand2: temp,
             display1: this.state.display1 + value,
@@ -70,8 +70,15 @@ class Body extends Component {
     } else {
       if (String(this.state.finalOperand1).length <= 10) {
         let temp = Number(this.state.operand1 + value);
-        if (temp) this.setState({ finalOperand1: temp, display1: temp });
-        else this.setState({ error: "ERROR" });
+        
+        if (temp || temp===0) {
+          
+          this.setState({ finalOperand1: temp, display1: temp })
+        }
+        else {
+          
+          this.setState({ error: "ERROR" })
+        };
         this.setState({ operand1: this.state.operand1 + value });
       } else {
         this.setState({ error: "LENGTH EXCEDDED" });
@@ -113,7 +120,7 @@ class Body extends Component {
    * @params {value}
    */
   getFinalRes = () => {
-    if (this.state.finalOperand1 && this.state.finalOperand2) {
+    if (this.state.operand1 && this.state.operand2) {
       let arr = [...this.state.history];
       arr.push(
         String(this.state.finalOperand1) +
@@ -200,7 +207,7 @@ class Body extends Component {
         <h1>Calculator</h1>
         <div className="row">
           <div className="col-9">
-            <div class="container w-75">
+            <div className="container w-75">
               <div style={{ margin: "10px", height: "75px" }}>
                 {this.state.error ? (
                   <h1>{this.state.error}</h1>
@@ -217,25 +224,25 @@ class Body extends Component {
                   type="button"
                   name=""
                   value="Del"
-                  class=" red small white-text top-margin"
+                  className=" red small white-text top-margin"
                   onClick={() => this.handleDelete()}
                 />
                 <input
                   type="button"
                   name=""
                   value="Clear"
-                  class=" red small white-text "
+                  className=" red small white-text "
                   style={{ marginTop: "4px" }}
                   onClick={() => this.handleclear()}
                 />
               </div>
               <div className="col-12">
-                {allVal.map((btn) => (
-                  <input
+                {allVal.map((btn,index) => (
+                  <input key={index}
                     type="button"
                     name=""
                     value={btn.val}
-                    class="global"
+                    className="global"
                     onClick={(e) =>
                       btn.id === "operand"
                         ? this.handleOperand(e.target.value)
@@ -245,12 +252,12 @@ class Body extends Component {
                 ))}
               </div>
               <div>
-                <div class="">
+                <div>
                   <input
                     type="button"
                     name=""
                     value="="
-                    class="green small"
+                    className="green small"
                     onClick={() => this.getFinalRes()}
                   />
                 </div>
